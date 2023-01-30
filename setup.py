@@ -22,7 +22,6 @@ setuptools.setup(
     			'sktime',
     			'numpy',
     			'pandas',
-    			'pickle',
     			'numba'],
 )
 
