@@ -5,7 +5,7 @@ from sktime.utils.data_io import load_from_tsfile_to_dataframe
 from skfeature.function.similarity_based import fisher_score
 from sklearn.ensemble import RandomForestClassifier
 
-from utils import multivariate_contracted_st
+from ruletransform.utils import multivariate_contracted_st
 
 #Path to the folder containing the original dataset
 data_path = os.path.join(os.sep,'')
