@@ -5,7 +5,7 @@ from pathlib import Path
 import pickle
 import random
 
-from shapelets import ContractedShapeletTransform
+from ruletransform.shapelets import ContractedShapeletTransform
 
 #Fit the transformer to all dimensions of the dataset
 class MultivariateTransformer:
