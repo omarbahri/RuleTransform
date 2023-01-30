@@ -22,6 +22,7 @@ setuptools.setup(
     			'sktime',
     			'numpy',
     			'pandas',
-    			'numba'],
+    			'numba',
+    			'skfeature @ git+https://github.com/jundongl/scikit-feature'],
 )
 
