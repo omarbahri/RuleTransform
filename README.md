@@ -6,4 +6,6 @@ O. Bahri, P. Li, S. F. Boubrahimi and S. M. Hamdi, "Shapelet-based Temporal Asso
 https://sites.google.com/view/ruletransform/
 ### Installation: <br />
 #### Using PIP: <br />
+```
 pip install git+https://github.com/omarbahri/RuleTransform
+```
