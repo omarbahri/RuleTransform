@@ -10,9 +10,9 @@ from sktime.utils.validation.panel import check_X_y
 from sklearn.utils import check_random_state
 from sktime.transformations.base import _PanelToTabularTransformer
 
-from shapelets import ShapeletTransform, ContractedShapeletTransform
+from ruletransform.hapelets import ShapeletTransform, ContractedShapeletTransform
 
-from utils import MultivariateTransformer, get_shapelets, get_shapelets_distances
+from ruletransform.utils import MultivariateTransformer, get_shapelets, get_shapelets_distances
 
 from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning
 import warnings
