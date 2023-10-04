@@ -23,6 +23,7 @@ setuptools.setup(
     			'numpy',
     			'pandas',
     			'numba',
+                'tslearn',
     			'skfeature @ git+https://github.com/jundongl/scikit-feature'],
 )
 
