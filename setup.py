@@ -19,7 +19,7 @@ setuptools.setup(
     license='MIT',
     packages=['ruletransform'],
     install_requires=['scikit-learn',
-    			'sktime==0.20.0'',
+    			'sktime==0.20.0',
     			'numpy',
     			'pandas',
     			'numba',
