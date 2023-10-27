@@ -9,12 +9,12 @@ https://sites.google.com/view/ruletransform/
 ```
 conda create -n rt python=3.6.13
 ```
-##### or alternatively, install python3.6.13 and: 
+##### or alternatively, install python3.6.13 and: <br />
 ```
  python3.6.13 -m venv ./rt
 source venv/bin/activate
 ```
-##### Then:
+##### Then:<br />
 ```
 pip install git+https://github.com/omarbahri/RuleTransform
 ```
