@@ -20,10 +20,10 @@ setuptools.setup(
     packages=['ruletransform'],
     install_requires=['scikit-learn',
     			'sktime==0.20.0',
-    			'numpy',
-    			'pandas',
-    			'numba',
-                'tslearn',
+    			'numpy==1.24.3',
+    			'pandas==1.4.1',
+    			'numba==0.58.0',
+                'tslearn==0.6.1',
     			'skfeature @ git+https://github.com/jundongl/scikit-feature'],
 )
 
