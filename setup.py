@@ -18,12 +18,12 @@ setuptools.setup(
   #  },
     license='MIT',
     packages=['ruletransform'],
-    install_requires=['scikit-learn',
-    			'sktime==0.20.0',
-    			'numpy==1.24.3',
-    			'pandas==1.4.1',
-    			'numba==0.58.0',
-                'tslearn==0.6.1',
+    install_requires=['scikit-learn==0.24.2',
+    			'sktime==0.9.0',
+    			'numpy==1.19.3',
+    			'pandas==1.1.5',
+    			'numba==0.53.1',
+                'tslearn=0.5.2',
     			'skfeature @ git+https://github.com/jundongl/scikit-feature'],
 )
 
