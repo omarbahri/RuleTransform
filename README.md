@@ -5,7 +5,16 @@ O. Bahri, P. Li, S. F. Boubrahimi and S. M. Hamdi, "Shapelet-based Temporal Asso
 ### Project website: <br />
 https://sites.google.com/view/ruletransform/
 ### Installation: <br />
-#### Using PIP: <br />
+###### Needs python3.6.13. I suggest using conda to create the virtual environment: <br />
+```
+conda create -n rt python=3.6.13
+```
+###### or alternatively, install python3.6.13 and: <br />
+```
+ python3.6.13 -m venv ./rt
+source venv/bin/activate
+```
+###### Then:
 ```
 pip install git+https://github.com/omarbahri/RuleTransform
 ```
