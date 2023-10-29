@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jul 29 15:33:17 2021
-
-@author: omar
-"""
+'''The bulk of this file was written by the authors of sktime (DOI10.5281/zenodo.3749000).'''
 
 import numpy as np
 import pandas as pd
