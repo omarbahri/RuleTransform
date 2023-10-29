@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from sklearn.metrics import accuracy_score
-from sktime.utils.data_io import load_from_tsfile_to_dataframe
+from ruletransform.data_io import load_from_tsfile_to_dataframe
 from skfeature.function.similarity_based import fisher_score
 from sklearn.ensemble import RandomForestClassifier
 
