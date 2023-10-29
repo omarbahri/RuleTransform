@@ -8,6 +8,7 @@ https://sites.google.com/view/ruletransform/
 python3.6.13 is required. I suggest using conda to create the virtual environment:
 ```
 conda create -n rt python=3.6.13
+```
 or alternatively, install python3.6.13 and: <br />
 ```
  python3.6.13 -m venv ./rt
