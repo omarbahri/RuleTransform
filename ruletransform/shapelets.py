@@ -1,3 +1,5 @@
+'''The bulk of this file was written by the authors of sktime (DOI10.5281/zenodo.3749000).'''
+
 import heapq
 import os
 import time
