@@ -18,3 +18,5 @@ Then:<br />
 ```
 pip install git+https://github.com/omarbahri/RuleTransform
 ```
+### Instructions: <br />
+The BasicMotions dataset is uploaded to the `data` directory. The other UEA datasets can be downloaded [here](https://timeseriesclassification.com/dataset.php). 
