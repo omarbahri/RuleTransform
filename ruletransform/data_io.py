@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""Functions for the input and output of data and results.
-
-todo: This file will be removed in version 0.10 and functionality moved to
-datasets/_data_io.py
-"""
+'''The bulk of this file was written by the authors of sktime (DOI10.5281/zenodo.3749000).'''
 
 import itertools
 import os
