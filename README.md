@@ -11,7 +11,7 @@ conda create -n rt python=3.6.13
 ```
 or alternatively, install python3.6.13 and: <br />
 ```
- python3.6.13 -m venv ./rt
+python3.6.13 -m venv ./rt
 source venv/bin/activate
 ```
 Then:<br />
