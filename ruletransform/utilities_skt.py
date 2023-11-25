@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug  2 11:26:54 2021
-
-@author: omar
-"""
+#Author: Omar Bahri
 
 from sklearn.base import clone
 import pandas as pd
