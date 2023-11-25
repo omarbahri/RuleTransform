@@ -1,3 +1,5 @@
+#Author: Omar Bahri
+
 import numpy as np
 from numba import njit, typed
 import random
