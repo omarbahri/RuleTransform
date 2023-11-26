@@ -597,9 +597,10 @@ class RuleTransform(_PanelToTabularTransformer):
         _all_rules_indices = np.delete(_all_rules_indices, _to_delete, axis=0)
         if not test:
             _all_rules_shs = np.delete(_all_rules_shs, _to_delete, axis=0)
-                
-        return _all_rules_counts.T, _all_rules_indices.T, _all_rules_shs.T
-
+            return _all_rules_counts.T, _all_rules_indices.T, _all_rules_shs.T
+        else:
+            return _all_rules_counts.T, _all_rules_indices.T
+        
     #Returns the threshold used to select shapelet occurences based on a given percentage
     def _get_occurences_threshold(self, shapelets_distances, ts_length, percentage):
         #List to hold all distances values
