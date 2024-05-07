@@ -25,6 +25,7 @@ setuptools.setup(
     			'numba==0.53.1',
                 'tslearn==0.5.2',
                 'scipy==1.5.4',
+                'matplotlib==3.1.2',
     			'skfeature @ git+https://github.com/jundongl/scikit-feature'],
 )
 
