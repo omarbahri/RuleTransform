@@ -152,6 +152,7 @@ def _get_all_as_podmsfe_bs_count_contracted(n_samples, all_shapelet_locations, t
                             rules_counts_f[dim_a][k][dim_b][s], rules_indices_f[dim_a][k][dim_b][s],
                             rules_counts_e[dim_a][k][dim_b][s], rules_indices_e[dim_a][k][dim_b][s])\
                             = _get_a_podmsfe_b_count(n_samples, all_shapelet_locations, dim_a, k, dim_b, s)
+                            
                             rules_shs_p[dim_a][k][dim_b][s], rules_shs_o[dim_a][k][dim_b][s],\
                                 rules_shs_d[dim_a][k][dim_b][s], rules_shs_m[dim_a][k][dim_b][s],\
                                 rules_shs_s[dim_a][k][dim_b][s], rules_shs_f[dim_a][k][dim_b][s],\
@@ -173,6 +174,7 @@ def _get_all_as_podmsfe_bs_count_contracted(n_samples, all_shapelet_locations, t
                                 rules_counts_f[dim_a][s][dim_b][k], rules_indices_f[dim_a][s][dim_b][k],
                                 rules_counts_e[dim_a][s][dim_b][k], rules_indices_e[dim_a][s][dim_b][k])\
                                 = _get_a_podmsfe_b_count(n_samples, all_shapelet_locations, dim_a, s, dim_b, k)
+                                
                                 rules_shs_p[dim_a][s][dim_b][k], rules_shs_o[dim_a][s][dim_b][k], rules_shs_d[dim_a][s][dim_b][k], rules_shs_m[dim_a][s][dim_b][k], rules_shs_s[dim_a][s][dim_b][k], rules_shs_f[dim_a][s][dim_b][k], rules_shs_e[dim_a][s][dim_b][k] = np.array([dim_a, s, dim_b, k], dtype=np.int32), np.array([dim_a, s, dim_b, k], dtype=np.int32), np.array([dim_a, s, dim_b, k], dtype=np.int32), np.array([dim_a, s, dim_b, k], dtype=np.int32), np.array([dim_a, s, dim_b, k], dtype=np.int32), np.array([dim_a, s, dim_b, k], dtype=np.int32), np.array([dim_a, s, dim_b, k], dtype=np.int32)
                                 
                             #Save the mined indices
@@ -212,7 +214,7 @@ def _get_all_as_podmsfe_bs_count_contracted(n_samples, all_shapelet_locations, t
             if time_ended:
                 print("Time is up! Couldn't go through all shapelet combinations.")
             
-            return (rules_counts_p, rules_indices_p, rules_counts_o, rules_indices_o, rules_counts_d, rules_indices_d, rules_counts_m, rules_indices_m, rules_counts_s, rules_indices_s, rules_counts_f, rules_indices_f, rules_counts_e, rules_indices_e, rules_shs_p, rules_shs_o, rules_shs_d, rules_shs_m, rules_shs_s, rules_shs_f, rules_shs_e)
+            return (mined_rules, rules_counts_p, rules_indices_p, rules_counts_o, rules_indices_o, rules_counts_d, rules_indices_d, rules_counts_m, rules_indices_m, rules_counts_s, rules_indices_s, rules_counts_f, rules_indices_f, rules_counts_e, rules_indices_e, rules_shs_p, rules_shs_o, rules_shs_d, rules_shs_m, rules_shs_s, rules_shs_f, rules_shs_e)
 
         else:
             #The number of rules
@@ -519,14 +521,17 @@ class RuleTransform(_PanelToTabularTransformer):
                 _rules_counts_e, _rules_indices_e, _, _, _, _, _, _, _)\
                 = _get_all_as_podmsfe_bs_count(self._n_ts, typed.List(self._all_shapelet_locations))
 
-            _all_rules_counts = self._transform(X, y, _rules_counts_p, _rules_counts_o, _rules_counts_d, _rules_counts_m, _rules_counts_s, _rules_counts_f, _rules_counts_e, test=test)
-            del _rules_counts_p, _rules_counts_o, _rules_counts_d, _rules_counts_m, _rules_counts_s, _rules_counts_f, _rules_counts_e
+            _all_rules_counts, _all_rules_indices = self._transform(X, y, _rules_counts_p, _rules_counts_o, _rules_counts_d, _rules_counts_m, _rules_counts_s, _rules_counts_f, _rules_counts_e,
+                                                                    _rules_indices_p, _rules_indices_o, _rules_indices_d, _rules_indices_m, _rules_indices_s, _rules_indices_f, _rules_indices_e, test=test)
+            del _rules_counts_p, _rules_counts_o, _rules_counts_d, _rules_counts_m, _rules_counts_s, _rules_counts_f, _rules_counts_e, _rules_indices_p, _rules_indices_o, _rules_indices_d, _rules_indices_m, _rules_indices_s, _rules_indices_f, _rules_indices_e
+            return _all_rules_counts, _all_rules_indices
         else:
-             _all_rules_counts = self._transform(X, y)
-             
-        return _all_rules_counts
+             _all_rules_counts, _all_rules_indices, _all_rules_shs = self._transform(X, y)     
+             return _all_rules_counts, _all_rules_indices, _all_rules_shs
 
-    def _transform(self, X, y=None, _rules_counts_p=None, _rules_counts_o=None, _rules_counts_d=None, _rules_counts_m=None, _rules_counts_s=None, _rules_counts_f=None, _rules_counts_e=None, test=False):
+    def _transform(self, X, y=None, _rules_counts_p=None, _rules_counts_o=None, _rules_counts_d=None, _rules_counts_m=None, _rules_counts_s=None, _rules_counts_f=None, _rules_counts_e=None, 
+                   _rules_indices_p=None, _rules_indices_o=None, _rules_indices_d=None, _rules_indices_m=None, _rules_indices_s=None, _rules_indices_f=None, _rules_indices_e=None, 
+                   _rules_shs_p=None, _rules_shs_o=None, _rules_shs_d=None, _rules_shs_m=None, _rules_shs_s=None, _rules_shs_f=None, _rules_shs_e=None, test=False):
         if not test:
             _rules_counts_p = self._rules_counts_p
             _rules_counts_o = self._rules_counts_o
@@ -560,22 +565,22 @@ class RuleTransform(_PanelToTabularTransformer):
         _rules_counts_f = _rules_counts_f.reshape(-1,X.shape[0])
         _rules_counts_e = _rules_counts_e.reshape(-1,X.shape[0])
         
-        _rules_indices_p = _rules_indices_p.reshape(-1,X.shape[0])
-        _rules_indices_o = _rules_indices_o.reshape(-1,X.shape[0])
-        _rules_indices_m = _rules_indices_d.reshape(-1,X.shape[0])
-        _rules_indices_d = _rules_indices_m.reshape(-1,X.shape[0])
-        _rules_indices_s = _rules_indices_s.reshape(-1,X.shape[0])
-        _rules_indices_f = _rules_indices_f.reshape(-1,X.shape[0])
-        _rules_indices_e = _rules_indices_e.reshape(-1,X.shape[0])
+        _rules_indices_p = _rules_indices_p.reshape(-1,X.shape[0],4)
+        _rules_indices_o = _rules_indices_o.reshape(-1,X.shape[0],4)
+        _rules_indices_m = _rules_indices_d.reshape(-1,X.shape[0],4)
+        _rules_indices_d = _rules_indices_m.reshape(-1,X.shape[0],4)
+        _rules_indices_s = _rules_indices_s.reshape(-1,X.shape[0],4)
+        _rules_indices_f = _rules_indices_f.reshape(-1,X.shape[0],4)
+        _rules_indices_e = _rules_indices_e.reshape(-1,X.shape[0],4)
         
         if not test:
-            _rules_shs_p = _rules_shs_p.reshape(-1,X.shape[0])
-            _rules_shs_o = _rules_shs_o.reshape(-1,X.shape[0])
-            _rules_shs_m = _rules_shs_m.reshape(-1,X.shape[0])
-            _rules_shs_d = _rules_shs_d.reshape(-1,X.shape[0])
-            _rules_shs_s = _rules_shs_s.reshape(-1,X.shape[0])
-            _rules_shs_f = _rules_shs_f.reshape(-1,X.shape[0])
-            _rules_shs_e = _rules_shs_e.reshape(-1,X.shape[0])
+            _rules_shs_p = _rules_shs_p.reshape(-1,4)
+            _rules_shs_o = _rules_shs_o.reshape(-1,4)
+            _rules_shs_m = _rules_shs_m.reshape(-1,4)
+            _rules_shs_d = _rules_shs_d.reshape(-1,4)
+            _rules_shs_s = _rules_shs_s.reshape(-1,4)
+            _rules_shs_f = _rules_shs_f.reshape(-1,4)
+            _rules_shs_e = _rules_shs_e.reshape(-1,4)
         
         #Concatenate the rules counts, indices, and shs (for the training set)
         _all_rules_counts = np.concatenate((_rules_counts_p, _rules_counts_o, _rules_counts_d,\
@@ -597,7 +602,7 @@ class RuleTransform(_PanelToTabularTransformer):
         _all_rules_indices = np.delete(_all_rules_indices, _to_delete, axis=0)
         if not test:
             _all_rules_shs = np.delete(_all_rules_shs, _to_delete, axis=0)
-            return _all_rules_counts.T, _all_rules_indices.T, _all_rules_shs.T
+            return _all_rules_counts.T, _all_rules_indices.T, _all_rules_shs
         else:
             return _all_rules_counts.T, _all_rules_indices.T
         
